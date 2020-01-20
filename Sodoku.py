@@ -7,7 +7,7 @@ def print_sodoku_board(board):
     """
         A utility function to print matrix
     """
-    
+
     print()
     n = len(board)
     for i in range(n):
