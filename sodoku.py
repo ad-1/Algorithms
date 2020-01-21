@@ -43,41 +43,6 @@ def get_zeros(board):
     return zeros
 
 
-def get_grid_info(board):
-    """
-    return all grids and a list of indexes within each grid on the board
-    """
-
-    grids = []
-    grid_indexes = []
-    n_rows, n_cols = len(board), len(board[0])
-    grid_range = int(n_rows**(1/2))
-    for i, j in it.product(range(0, n_rows, grid_range), range(0, n_cols, grid_range)):
-        grid = []
-        indexes = []
-        for dj, di in it.product(range(grid_range), range(grid_range)):
-            grid.append(board[i + di][j + dj])
-            indexes.append([i + di, j + dj])
-        grids.append(grid)
-        grid_indexes.append(indexes)
-    return grids, grid_indexes
-
-
-def get_curr_grid(zero, grids):
-    """
-    get grid and grid number for zero
-    """
-
-    grid_size = int(len(grids) ** (1 / 2))
-    grid_number = 0
-    for r in range(grid_size):
-        for c in range(grid_size):
-            if r * grid_size <= zero[0] <= (r * grid_size) + (grid_size - 1) and \
-                    c * grid_size <= zero[1] <= (c * grid_size) + grid_size - 1:
-                return grids[grid_number], grid_number
-            grid_number += 1
-
-
 def get_row_and_col(board, zero):
     """
     get row and column for zero
@@ -91,28 +56,27 @@ def get_row_and_col(board, zero):
     return row, col
 
 
-def update_grids(grids, grid_number, val):
-    """
-    backtrack grid value
-    """
-
-    grid = grids[grid_number]
-    grid[:] = [0 if x == val else x for x in grid]
-    grids[grid_number] = grid
-    return grids
-
-
-def validate_entry(row, col, grid, val):
+def validate_entry(board, zero, val, grid_size):
     """
     validate value is a possible solution in given row, column and grid
     """
 
-    if val in row or val in col or val in grid:
-        return 0
-    return val
+    row, col = get_row_and_col(board, zero)
+    if val in row or val in col:
+        return False
+
+    grid_x = zero[1] // grid_size
+    grid_y = zero[0] // grid_size
+
+    for i in range(grid_y * grid_size, (grid_y * grid_size) + grid_size):
+        for j in range(grid_x * grid_size, (grid_x * grid_size) + grid_size):
+            if board[i][j] == val and (i, j) != zero:
+                return False
+
+    return True
 
 
-def solve_sodoku():
+def solve_sodoku(board):
     """
         This function solves sodoku board using Backtracking. This function mainly uses solve_sokodu_util()
         to solve the problem. It returns false if no complete board is possible, otherwise return true and prints the
@@ -120,7 +84,43 @@ def solve_sodoku():
         this function prints one of the feasible solutions.
     """
 
-    board = [
+    print_sodoku_board(board)
+    zeros = get_zeros(board)
+    grid_size = int(len(board) ** (1 / 2))
+
+    if not solve_sokodu_util(board, zeros, 0, grid_size):
+        print("Solution does not exist")
+    else:
+        print_sodoku_board(board)
+
+
+def solve_sokodu_util(board, zeros, pos, grid_size):
+    """
+     A recursive utility function to solve sodoku problem using backtracking
+    """
+
+    if not any(0 in row for row in board):
+        return True
+
+    zero = zeros[pos]
+
+    for val in range(1, len(board) + 1):
+        if validate_entry(board, zero, val, grid_size):
+            board[zero[0]][zero[1]] = val
+            pos += 1
+            if solve_sokodu_util(board, zeros, pos, grid_size):
+                return True
+
+            board[zero[0]][zero[1]] = 0
+            pos -= 1
+
+    return False
+
+
+# Driver program to test above function
+if __name__ == "__main__":
+
+    b = [
         [7, 8, 0, 4, 0, 0, 1, 2, 0],
         [6, 0, 0, 0, 7, 5, 0, 0, 9],
         [0, 0, 0, 6, 0, 1, 0, 7, 8],
@@ -132,53 +132,4 @@ def solve_sodoku():
         [0, 4, 9, 2, 0, 6, 0, 0, 7]
     ]
 
-    print_sodoku_board(board)
-    zeros = get_zeros(board)
-    grids, grid_indexes = get_grid_info(board)
-    values = list(range(1, len(board) + 1))
-    pos = 0
-
-    if not solve_sokodu_util(board, zeros, grids, grid_indexes, {}, pos, values):
-        print("Solution does not exist")
-    else:
-        print_sodoku_board(board)
-
-
-def solve_sokodu_util(board, zeros, grids, grid_indexes, tried, pos, values):
-    """
-     A recursive utility function to solve sodoku problem using backtracking
-    """
-
-    if not any(0 in row for row in board):
-        return True
-
-    zero = zeros[pos]
-    row, col = get_row_and_col(board, zero)
-    grid, grid_number = get_curr_grid(zero, grids)
-
-    for val in values:
-        z_key = tuple(zero)
-        tried.setdefault(z_key, [])
-        if not any([val in tried[z_key]]):
-            tried[z_key].append(val)
-            if not validate_entry(row, col, grid, val) == 0:
-                board[zero[0]][zero[1]] = val
-                grid_index = grid_indexes[grid_number].index(zero)
-                grids[grid_number][grid_index] = val
-                pos += 1
-                if solve_sokodu_util(board, zeros, grids, grid_indexes, tried, pos, values):
-                    return True
-
-                # Backtracking
-                grids[grid_number][grid_index] = 0
-                board[zero[0]][zero[1]] = 0
-                curr_zero = zeros[pos]
-                tried[tuple(curr_zero)] = []
-                pos -= 1
-
-    return False
-
-
-# Driver program to test above function
-if __name__ == "__main__":
-    solve_sodoku()
+    solve_sodoku(b)
