@@ -19,8 +19,8 @@ def print_board(board):
     """
 
     print()
-    for i in range(n):
-        for j in range(n):
+    for i in range(len(board)):
+        for j in range(len(board)):
             print(board[i][j], end=' ')
         print()
 

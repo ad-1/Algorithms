@@ -1,11 +1,11 @@
-# Backtracking algorithm - sodoku solver
+# Sodoku - Backtracking Algorithm
 
-import itertools as it
+from timeit import default_timer as timer
 
 
 def print_sodoku_board(board):
     """
-        A utility function to print matrix
+        print sodoku matrix
     """
 
     print()
@@ -21,7 +21,7 @@ def print_sodoku_board(board):
 
 def is_on_board(zero, board):
     """
-    check if i,j are valid indexes for N*N board
+        check if i,j are valid indexes for N*N board
     """
 
     n = len(board)
@@ -32,7 +32,7 @@ def is_on_board(zero, board):
 
 def get_zeros(board):
     """
-    return all zero index paths on board
+        return all zero index paths on board
     """
 
     zeros = []
@@ -45,7 +45,7 @@ def get_zeros(board):
 
 def get_row_and_col(board, zero):
     """
-    get row and column for zero
+        get row and column for zero
     """
 
     row = board[zero[0]]
@@ -58,7 +58,7 @@ def get_row_and_col(board, zero):
 
 def validate_entry(board, zero, val, grid_size):
     """
-    validate value is a possible solution in given row, column and grid
+        validate value is a possible solution in given row, column and grid
     """
 
     row, col = get_row_and_col(board, zero)
@@ -78,10 +78,8 @@ def validate_entry(board, zero, val, grid_size):
 
 def solve_sodoku(board):
     """
-        This function solves sodoku board using Backtracking. This function mainly uses solve_sokodu_util()
-        to solve the problem. It returns false if no complete board is possible, otherwise return true and prints the
-        solution board. Please note that there may be more than one solution,
-        this function prints one of the feasible solutions.
+        solve sodoku board using Backtracking.
+        sets initial values for recursive utility function
     """
 
     print_sodoku_board(board)
@@ -96,7 +94,7 @@ def solve_sodoku(board):
 
 def solve_sokodu_util(board, zeros, pos, grid_size):
     """
-     A recursive utility function to solve sodoku problem using backtracking
+        recursive function for solving
     """
 
     if not any(0 in row for row in board):
@@ -121,15 +119,18 @@ def solve_sokodu_util(board, zeros, pos, grid_size):
 if __name__ == "__main__":
 
     b = [
-        [7, 8, 0, 4, 0, 0, 1, 2, 0],
-        [6, 0, 0, 0, 7, 5, 0, 0, 9],
-        [0, 0, 0, 6, 0, 1, 0, 7, 8],
-        [0, 0, 7, 0, 4, 0, 2, 6, 0],
-        [0, 0, 1, 0, 5, 0, 9, 3, 0],
-        [9, 0, 4, 0, 6, 0, 0, 0, 5],
-        [0, 7, 0, 3, 0, 0, 0, 1, 2],
-        [1, 2, 0, 0, 0, 7, 4, 0, 0],
-        [0, 4, 9, 2, 0, 6, 0, 0, 7]
+        [0, 4, 0, 9, 0, 0, 0, 0, 0],
+        [0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [1, 0, 6, 7, 3, 0, 0, 0, 0],
+        [0, 0, 8, 0, 0, 9, 0, 1, 0],
+        [0, 0, 0, 0, 6, 0, 4, 0, 0],
+        [4, 0, 0, 0, 1, 5, 0, 0, 7],
+        [0, 3, 0, 0, 0, 2, 0, 9, 6],
+        [0, 0, 9, 0, 7, 0, 0, 0, 2],
+        [0, 1, 0, 0, 0, 6, 7, 0, 4]
     ]
 
+    start = timer()
     solve_sodoku(b)
+    end = timer()
+    print('\ncompleted in {} seconds'.format(end - start))
