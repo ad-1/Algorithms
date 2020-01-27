@@ -1,10 +1,9 @@
-# Graph Coloring - Backtracking Algorithm
+# Graph Coloring (m Coloring Problem) - Backtracking Algorithm
 
 """
     'm Coloring Problem'
-    Given an undirected graph and a number m,
-    determine if the graph can be colored with
-    at most m colors such that no two adjacent
+    Given an undirected graph and a number m, determine if the graph
+    can be colored with at most m colors such that no two adjacent
     vertices of the graph are colored with same color.
     Coloring of a graph means assignment of colors to all vertices.
 """
@@ -25,7 +24,7 @@ def print_graph(graph):
 
 def is_on_graph(graph, v):
     """
-        check x,y coordinates are in the maze
+        check vertex coordinates are in the graph
     """
 
     if 0 <= v[0] < len(graph) and 0 <= v[1] < len(graph):
@@ -35,7 +34,7 @@ def is_on_graph(graph, v):
 
 def get_vertices(graph):
     """
-        return all zero index paths on board
+        return all vertices in the graph
     """
 
     vertices = []
@@ -134,11 +133,12 @@ def solve_m_coloring(graph, colors, vertices, pos):
     return False
 
 
+# Driver program to test above function
 if __name__ == '__main__':
     g = [[0, 1, 1, 1],
          [1, 0, 1, 0],
          [1, 1, 0, 1],
          [1, 0, 1, 0]]
 
-    c = [2, 3, 4]
-    m_coloring(g, c)
+    c_ = [2, 3, 4]
+    m_coloring(g, c_)

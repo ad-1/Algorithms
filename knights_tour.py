@@ -64,8 +64,6 @@ def solve_knights_tour_util(board, curr_x, curr_y, move_x, move_y, pos):
             board[new_x][new_y] = pos
             if solve_knights_tour_util(board, new_x, new_y, move_x, move_y, pos + 1):
                 return True
-
-            # Backtracking
             board[new_x][new_y] = -1
     return False
 

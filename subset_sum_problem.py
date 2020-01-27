@@ -99,6 +99,7 @@ def subset_sum(arr, s):
         print('No solution exists')
 
 
+# Driver program to test above function
 if __name__ == '__main__':
     # array, sum_ = [3, 9, 34, 4, 12, 5, 2], 9
     # array, sum_ = [15, 22, 14, 26, 32, 9, 16, 8], 53

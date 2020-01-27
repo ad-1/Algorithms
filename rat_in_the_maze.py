@@ -1,4 +1,4 @@
-# Rat in the Maze Problem - Backtracking Algorithm
+# Rat in the Maze - Backtracking Algorithm
 
 
 def print_maze(maze, n):
@@ -6,7 +6,7 @@ def print_maze(maze, n):
         print maze matrix
     """
 
-    print('')
+    print()
     for i in range(n):
         for j in range(n):
             print(maze[i][j], end=' ')
@@ -25,8 +25,8 @@ def is_in_maze(x, y, n):
 
 def can_move_forward(row, col, maze):
     """
-        check if the path is clear
-        return True if can move forward in the maze
+        check if the path is clear and return
+        True if can move forward in the maze
     """
 
     if maze[row][col] == 0:
@@ -34,22 +34,23 @@ def can_move_forward(row, col, maze):
     return True
 
 
-def proceed_through_maze(maze, path, n, curr_row, curr_col, move_row, move_col, visited):
+def proceed_through_maze(maze, path, n, r, c, mv_r, mv_c, visited):
     """
-        main recursive method to solve the maze problem
+        main recursive method to solve the rat
+        in the maze problem using backtracking
     """
 
-    if curr_row == curr_col == n - 1:
+    if r == c == n - 1:
         return True
 
-    for i in range(len(move_row)):
-        new_row = curr_row + move_row[i]
-        new_col = curr_col + move_col[i]
+    for i in range(len(mv_r)):
+        new_row = r + mv_r[i]
+        new_col = c + mv_c[i]
         if is_in_maze(new_row, new_col, n):
             if can_move_forward(new_row, new_col, maze) and not any(([new_row, new_col]) in visited for point in visited):
                 path[new_row][new_col] = 1
                 visited.append([new_row, new_col])
-                if proceed_through_maze(maze, path, n, new_row, new_col, move_row, move_col, visited):
+                if proceed_through_maze(maze, path, n, new_row, new_col, mv_r, mv_c, visited):
                     return True
                 path[new_row][new_col] = 0
             else:
@@ -58,10 +59,11 @@ def proceed_through_maze(maze, path, n, curr_row, curr_col, move_row, move_col, 
 
 
 def traverse_maze():
-
     """
-        This function solves the Rat in the Maze problem using Backtracking.
-        It returns false if no path is possible, otherwise return true and prints the solution matrix.
+        Main driver method to set initial values
+        for solving using backtracking.
+        returns false if no path is possible,
+        otherwise prints the solution matrix.
     """
 
     maze = [[1, 0, 1, 1, 1, 1, 0],
@@ -76,17 +78,17 @@ def traverse_maze():
     path = [[0 for i in range(n)] for i in range(n)]
     print_maze(maze, n)
 
-    curr_row = 0
-    curr_col = 0
+    r = 0
+    c = 0
 
-    path[curr_row][curr_col] = 1
+    path[r][c] = 1
 
     move_row = [0, 1,  0, -1]
     move_col = [1, 0, -1,  0]
 
-    visited = ([[curr_row, curr_col]])
+    visited = ([[r, c]])
 
-    if not proceed_through_maze(maze, path, n, curr_row, curr_col, move_row, move_col, visited):
+    if not proceed_through_maze(maze, path, n, r, c, move_row, move_col, visited):
         print("Solution does not exist")
     else:
         print_maze(path, n)
