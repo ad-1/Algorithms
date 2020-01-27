@@ -3,13 +3,13 @@
 
 ## Knight's Tour
 
-A knight's tour is a sequence of moves of a knight on a chessboard such that the knight visits every square only once.
+A knight's tour is a sequence of moves of a knight on an N*N chessboard such that the knight visits every square only once.
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/d/da/Knight%27s_tour_anim_2.gif" alt="knights tour" width="250"/>
 
 ## Rat in the Maze
 
-In this problem, there is a given maze of size N x N. The source and the destination location is top-left cell and bottom right cell respectively.
+In this problem, there is a given maze of size N x N. The source and the destination location is top-left cell and bottom right cell respectively. The objective is the find the path from the source to the destination if one exists.
 
 <img src="https://www.geeksforgeeks.org/wp-content/uploads/ratinmaze_filled11.png" alt="Maze Problem" width="250"/>
 
