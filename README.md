@@ -1,4 +1,4 @@
-# Python backtracking algorithm problem solving
+# Backtracking Algorithm - Python
 
 
 ## Knight's Tour
