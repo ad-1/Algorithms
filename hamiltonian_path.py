@@ -1,35 +1,25 @@
 # Hamiltonian Cycle - Backtracking Algorithm
 
 """
-Hamiltonian Path in an undirected or directed graph is a
-path that visits each vertex exactly once.
+    Hamiltonian Path in an undirected or directed graph is a
+    path that visits each vertex exactly once.
 """
 
+from timeit import default_timer as timer
 
-def print_graph(graph):
+
+def get_col(board, r, c):
     """
-        print graph matrix
-    """
-
-    print()
-    for i in range(len(graph)):
-        for j in range(len(graph)):
-            print(graph[i][j], end=' ')
-        print()
-    print()
-
-
-def is_on_graph(graph, v):
-    """
-        check x,y coordinates are in the maze
+        get column elements for given column number
     """
 
-    if 0 <= v[0] < len(graph) and 0 <= v[1] < len(graph):
-        return True
-    return False
+    col = []
+    for row in board:
+        col.append(row[c])
+    return col
 
 
-def hamiltonian_path(graph):
+def hamiltonian_cycle(graph):
     """
         main driver method to set initial values for
         recursive solver which will find a hamilton
@@ -37,30 +27,86 @@ def hamiltonian_path(graph):
     """
 
     n = len(graph)
-    cycle = []
-    print_graph(graph)
-    if solve_hamiltonian_path(graph, n, cycle):
-        print(cycle)
+    path = [0]
+    v = 0
+    if solve_hamiltonian_cycle(graph, n, path, v):
+        # path = [x + 1 for x in path]
+        print(path)
     else:
         print('Hamilton Path is not possible')
 
 
-def solve_hamiltonian_path(graph, n, cycle):
+def solve_hamiltonian_cycle(graph, n, path, v):
+    """
+        recursive solver method to find hamiltonian
+        cycle if one exists
+    """
 
-    if len(cycle) == n:
+    if len(path) == n + 1:
         return True
 
-    for i in range(len(graph)):
+    for c in range(0, n):
+        if c == v:
+            continue
+        if graph[v][c] == 1 and c not in path:
+            path.append(c)
+            if len(path) == n:
+                if graph[path[-1]][path[0]] == 1:
+                    path.append(path[0])
+                    return True
+                path.pop(-1)
+                return False
+            if solve_hamiltonian_cycle(graph, n, path, c):
+                return True
+            path.pop(-1)
 
-        print(graph[i][i])
+    return False
 
 
 # Driver program to test above function
 if __name__ == '__main__':
-    g = [[0, 1, 0, 1, 0],  # 0 [0, 0]
-         [1, 0, 1, 1, 0],  # 1 [1, 1]
-         [0, 1, 0, 1, 1],  # 2 [2, 2]
-         [1, 1, 1, 0, 1],  # 3 [3, 3]
-         [0, 0, 1, 1, 0]]  # 4 [4, 4]
 
-    hamiltonian_path(g)
+    g1 = [[0, 1, 0, 1, 0],
+          [1, 0, 1, 1, 0],
+          [0, 1, 0, 1, 1],
+          [1, 1, 1, 0, 1],
+          [0, 0, 1, 1, 0]]
+
+    g2 = [[0, 1, 0, 1, 0],
+          [1, 0, 1, 1, 1],
+          [0, 1, 0, 0, 1],
+          [1, 1, 0, 0, 1],
+          [0, 1, 1, 1, 0]]
+
+    g3 = [[0, 1, 0, 1, 0],
+          [1, 0, 1, 1, 1],
+          [0, 1, 0, 0, 1],
+          [1, 1, 0, 0, 0],
+          [0, 1, 1, 0, 0]]
+
+    g4 = [[0, 1, 1, 0, 0, 1, 0, 0, 0, 0],
+          [1, 0, 0, 0, 0, 0, 0, 0, 1, 1],
+          [1, 0, 0, 1, 0, 0, 1, 0, 0, 0],
+          [0, 0, 1, 0, 1, 0, 0, 0, 1, 0],
+          [0, 0, 0, 1, 0, 1, 0, 0, 0, 1],
+          [1, 0, 0, 0, 1, 0, 0, 1, 0, 0],
+          [0, 0, 1, 0, 0, 0, 0, 1, 0, 1],
+          [0, 0, 0, 0, 0, 1, 1, 0, 1, 0],
+          [0, 1, 0, 1, 0, 0, 0, 1, 0, 0],
+          [0, 1, 0, 0, 1, 0, 1, 0, 0, 0]]
+
+    g5 = [[0, 1, 1, 0, 0, 1, 0, 0, 0, 0],
+          [1, 0, 0, 1, 0, 0, 1, 0, 0, 0],
+          [1, 0, 0, 1, 1, 0, 0, 1, 0, 0],
+          [0, 1, 1, 0, 1, 0, 0, 0, 1, 0],
+          [0, 0, 1, 1, 0, 0, 0, 0, 0, 0],
+          [1, 0, 0, 0, 0, 0, 1, 1, 0, 1],
+          [0, 1, 0, 0, 0, 1, 0, 0, 1, 1],
+          [0, 0, 1, 0, 0, 1, 0, 0, 1, 1],
+          [0, 0, 0, 1, 0, 0, 1, 1, 0, 1],
+          [0, 0, 0, 0, 0, 1, 1, 1, 1, 0]]
+
+    start = timer()
+    hamiltonian_cycle(g5)
+    end = timer()
+    print('\ncompleted in {} seconds'.format(end - start))

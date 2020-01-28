@@ -17,6 +17,7 @@ def print_sodoku_board(board):
             else:
                 print(' {}'.format(board[i][j]), end=' ')
         print()
+    print()
 
 
 def is_on_board(zero, board):

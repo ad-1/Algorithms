@@ -1,14 +1,18 @@
 # Knight's Tour Problem - Backtracking Algorithm
 
-n = 8
+"""
+    A knight's tour is a sequence of moves of a
+    knight on an N*N chessboard such that the
+    knight visits every square only once.
+"""
 
 
-def is_safe(board, row, col):
+def is_safe(board, n, r, c):
     """
-        check if i,j are valid indexes for N*N chessboard
+        check if (r,c) are valid indexes for board
     """
 
-    if 0 <= row < n and 0 <= col < n and board[row][col] == -1:
+    if 0 <= r < n and 0 <= c < n and board[r][c] == -1:
         return True
     return False
 
@@ -19,55 +23,59 @@ def print_board(board):
     """
 
     print()
-    for i in range(len(board)):
-        for j in range(len(board)):
-            print(board[i][j], end=' ')
+    n = len(board)
+    for i in range(n):
+        for j in range(n):
+            if len(str(board[i][j])) == 2:
+                print('{}'.format(board[i][j]), end=' ')
+            else:
+                print(' {}'.format(board[i][j]), end=' ')
         print()
+    print()
 
 
-def solve_knights_tour():
+def knights_tour(n):
     """
-        solver driver method Knight Tour problem
+        driver method for Knight Tour problem
+        which sets initial values
     """
 
     board = [[-1 for i in range(n)] for i in range(n)]
     print_board(board)
 
-    # move_x and move_y define next move of Knight
-    move_x = [2, 1, -1, -2, -2, -1, 1, 2]
-    move_y = [1, 2, 2, 1, -1, -2, -2, -1]
+    mv_r = [2, 1, -1, -2, -2, -1, 1, 2]
+    mv_c = [1, 2, 2, 1, -1, -2, -2, -1]
 
-    # Since the Knight is initially at the first block
     board[0][0] = 0
 
-    # Step counter for knight's position
     pos = 1
 
-    if not solve_knights_tour_util(board, 0, 0, move_x, move_y, pos):
+    if not solve_knights_tour(board, n, 0, 0, mv_r, mv_c, pos):
         print("Solution does not exist")
     else:
         print_board(board)
 
 
-def solve_knights_tour_util(board, curr_x, curr_y, move_x, move_y, pos):
+def solve_knights_tour(board, n, c_row, c_col, mv_r, mv_c, pos):
     """
-        recursive function
+        recursive function to solve knights tour
+        using backtracking
     """
 
     if pos == n ** 2:
         return True
 
     for i in range(n):
-        new_x = curr_x + move_x[i]
-        new_y = curr_y + move_y[i]
-        if is_safe(new_x, new_y, board):
-            board[new_x][new_y] = pos
-            if solve_knights_tour_util(board, new_x, new_y, move_x, move_y, pos + 1):
+        new_r = c_row + mv_r[i]
+        new_c = c_col + mv_c[i]
+        if is_safe(board, n, new_r, new_c):
+            board[new_r][new_c] = pos
+            if solve_knights_tour(board, n, new_r, new_c, mv_r, mv_c, pos + 1):
                 return True
-            board[new_x][new_y] = -1
+            board[new_r][new_c] = -1
     return False
 
 
 # Driver program to test above function
 if __name__ == "__main__":
-    solve_knights_tour()
+    knights_tour(n=8)
