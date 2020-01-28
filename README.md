@@ -32,9 +32,9 @@ Given a set of integers and an integer s, is there a non-empty subset whose sum 
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/9/90/Petersen_graph_3-coloring.svg" alt="Peterson Graph Coloring" width="250"/>
 
-## Hamiltonian Path
+## Hamiltonian Cycle
 
-Hamiltonian Path in an undirected or directed graph is a path that visits each vertex exactly once. Determining whether such paths and cycles exist in a given graph using its adjency matrix.
+A Hamiltonian path is a path in an undirected or directed graph that visits each vertex exactly once. A Hamiltonian cycle (or Hamiltonian circuit) is a Hamiltonian path that is a cycle. Problem is to determine whether a and cycle exists in a graph using its adjacency matrix.
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Hamiltonian_path_3d.svg" alt="Dodecahedron Hamilton Path" width="250"/>
 
