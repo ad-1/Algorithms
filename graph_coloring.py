@@ -6,6 +6,11 @@
     can be colored with at most m colors such that no two adjacent
     vertices of the graph are colored with same color.
     Coloring of a graph means assignment of colors to all vertices.
+
+    NOTE: not using adjacency matrix
+    matrix is square graph with horizontal, vertical and diagonal 1's
+    indicating a connection between vertices.
+    - naive solution without prior knowledge of graph theory
 """
 
 
@@ -151,5 +156,5 @@ if __name__ == '__main__':
           [0, 0, 0, 1, 0, 0, 1, 1, 0, 1],
           [0, 0, 0, 0, 0, 1, 1, 1, 1, 0]]
 
-    c_ = ['r', 'g', 'b']
+    c_ = ['r', 'g', 'b', 'p']
     m_coloring(g5, c_)
