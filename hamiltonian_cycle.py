@@ -6,17 +6,7 @@
 """
 
 from timeit import default_timer as timer
-
-
-def get_col(board, r, c):
-    """
-        get column elements for given column number
-    """
-
-    col = []
-    for row in board:
-        col.append(row[c])
-    return col
+from grid_adjacency_matrix import adjacency_matrix
 
 
 def hamiltonian_cycle(graph):
@@ -63,19 +53,6 @@ def solve_hamiltonian_cycle(graph, n, path, v):
     return False
 
 
-def adjacency_matrix(rows, cols):
-    n = rows * cols
-    m = [[0 for _ in range(n)] for _ in range(n)]
-    for r in range(rows):
-        for c in range(cols):
-            i = r * cols + c
-            if c > 0:
-                m[i - 1][i] = m[i][i - 1] = 1
-            if r > 0:
-                m[i - cols][i] = m[i][i - cols] = 1
-    return m
-
-
 # Driver program to test above function
 if __name__ == '__main__':
 
@@ -119,7 +96,7 @@ if __name__ == '__main__':
           [0, 0, 0, 1, 0, 0, 1, 1, 0, 1],
           [0, 0, 0, 0, 0, 1, 1, 1, 1, 0]]
 
-    m = adjacency_matrix(5, 5)
+    m = adjacency_matrix(6, 6)
     start = timer()
     hamiltonian_cycle(m)
     end = timer()
