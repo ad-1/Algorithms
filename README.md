@@ -1,5 +1,8 @@
-# Backtracking Algorithm - Python
+# Backtracking Algorithm Projects - Python
 
+"Backtracking is a general algorithm for finding all solutions to some computational problems, notably constraint satisfaction problems, that incrementally builds candidates to the solutions, and abandons a candidate as soon as it determines that the candidate cannot possibly be completed to a valid solution." - Wikipedia
+
+(Disclaimer: all images are for illustration purposes only)
 
 ## Knight's Tour
 
@@ -38,9 +41,11 @@ A Hamiltonian path is a path in an undirected or directed graph that visits each
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Hamiltonian_path_3d.svg" alt="Dodecahedron Hamilton Path" width="250"/>
 
-## N*N Sodoku Board
+## Sodoku
 
 Sudoku is a logic-based, combinatorial number-placement puzzle. The objective is to fill a N×N grid with digits so that each column, each row, and each of the N N^(1/2)×N^(1/2) subgrids that compose the grid contain all of the digits from 1 to N.
 This solver can solve any N*N board (e.g 9x9, 16x16 etc..)
+
+Sodoku GUI designed using Tkinter for a 9x9 board. Can play game and also visualise the backtracking algorithm in progress.
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/The_first_discovered_minimal_9x9_Sudoku_puzzle_with_40_givens.png" alt="Sodoku Board" width="250"/>
