@@ -1,7 +1,5 @@
 # Sodoku - Backtracking Algorithm
 
-from timeit import default_timer as timer
-
 
 def print_sodoku_board(board):
     """
@@ -114,24 +112,3 @@ def solve_sokodu_util(board, zeros, pos, grid_size):
             pos -= 1
 
     return False
-
-
-# Driver program to test above function
-if __name__ == "__main__":
-
-    b = [
-        [0, 4, 0, 9, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [1, 0, 6, 7, 3, 0, 0, 0, 0],
-        [0, 0, 8, 0, 0, 9, 0, 1, 0],
-        [0, 0, 0, 0, 6, 0, 4, 0, 0],
-        [4, 0, 0, 0, 1, 5, 0, 0, 7],
-        [0, 3, 0, 0, 0, 2, 0, 9, 6],
-        [0, 0, 9, 0, 7, 0, 0, 0, 2],
-        [0, 1, 0, 0, 0, 6, 7, 0, 4]
-    ]
-
-    start = timer()
-    solve_sodoku(b)
-    end = timer()
-    print('\ncompleted in {} seconds'.format(end - start))
