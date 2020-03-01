@@ -4,44 +4,29 @@
 
 "Backtracking is a general algorithm for finding all solutions to some computational problems, notably constraint satisfaction problems, that incrementally builds candidates to the solutions, and abandons a candidate as soon as it determines that the candidate cannot possibly be completed to a valid solution." - Wikipedia
 
-(Images are for illustration purposes only)
-
 ### Knight's Tour
 
 A knight's tour is a sequence of moves of a knight on an N*N chessboard such that the knight visits every square only once.
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/d/da/Knight%27s_tour_anim_2.gif" alt="knights tour" width="250"/>
 
 ### Rat in the Maze
 
 In this problem, there is a given maze of size N x N. The source and the destination location is top-left cell and bottom right cell respectively. The objective is the find the path from the source to the destination if one exists.
 
-<img src="https://www.geeksforgeeks.org/wp-content/uploads/ratinmaze_filled11.png" alt="Maze Problem" width="250"/>
-
 ### N Queen Problem
 
 N Queen is the problem of placing N chess queens on an N×N chessboard such that no two queens attack each other.
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/1/1f/Eight-queens-animation.gif" alt="N Queen 8" width="250"/>
 
 ### Subset Sum Problem
 
 Given a set of integers and an integer s, is there a non-empty subset whose sum is s?
 
-<img src="https://media.geeksforgeeks.org/wp-content/uploads/subsetSum_Backtracking.jpg" alt="Subset Sum Tree" width="350"/>
-
-
 ### Graph Coloring
 
 'm Coloring Problem'. Given an undirected graph and a number m, determine if the graph can be colored with at most m colors such that no two adjacent vertices of the graph are colored with same color.
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/9/90/Petersen_graph_3-coloring.svg" alt="Peterson Graph Coloring" width="250"/>
-
 ### Hamiltonian Cycle
 
 A Hamiltonian path is a path in an undirected or directed graph that visits each vertex exactly once. A Hamiltonian cycle (or Hamiltonian circuit) is a Hamiltonian path that is a cycle. Problem is to determine whether a and cycle exists in a graph using its adjacency matrix.
-
-<img src="https://upload.wikimedia.org/wikipedia/commons/6/6c/Hamiltonian_path_3d.svg" alt="Dodecahedron Hamilton Path" width="250"/>
 
 ### Sodoku
 
@@ -50,21 +35,15 @@ This solver can solve any N*N board (e.g 9x9, 16x16 etc..)
 
 Sodoku GUI designed using Tkinter for a 9x9 board. Can play game and also visualise the backtracking algorithm in progress.
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/The_first_discovered_minimal_9x9_Sudoku_puzzle_with_40_givens.png" alt="Sodoku Board" width="250"/>
-
 ## Dynamic Programming
 
 ### Fibonacci
 
 Finding the nth fibonacci number in the sequence. The Fibonacci sequence is the sum of the two preceding numbers, starting from 0 and 1.
 
-<img src="https://www.mathsisfun.com/numbers/images/fibonacci-spiral.svg" alt="fibonacci sequence" width="300">
-
 ### Ugly Numbers
 
 Ugly numbers are numbers whose only prime factors are 2, 3 or 5. Using dynmaic programming to find the nth ugly number.
-
-<img src="https://www.w3resource.com/w3r_images/java-number-image-exercise-1.svg" alt="ugly numbers" width="350">
 
 ### Catalan Numbers
 
@@ -72,7 +51,23 @@ The Catalan numbers form a sequence of natural numbers that occur in various cou
 
 Writing a program to find the nth Catalan Number.
 
-<img src="https://ds055uzetaobb.cloudfront.net/brioche/uploads/mzzJsNGy0R-group-2.png?width=3000" alt="restricted random walks" width="300">
+## Numerical Analysis
 
+### Bisection Method
 
+The bisection method is a root-finding method that applies to any continuous functions for which one knows two values with opposite signs. Related to Intermediate Value Theorem. If there is a root of f(x) on the interval [a, b] then f(a) and f(b) must have a difference sign i.e. f(a)f(b) < 0
+
+Implementation of this method in python to the root of f(x) on an interval if it exists.
+
+### Newton's Method
+
+Newton's method, also known as the Newton–Raphson method, in Python. Named after Isaac Newton and Joseph Raphson, is a root-finding algorithm which produces successively better approximations to the roots (or zeroes) of a real-valued function.
+
+### Secant Method
+
+The secant method root-finding algorithm in Python. The method uses a succession of roots of secant lines to better approximate a root of a function f.
+
+### Gaussian Elimination
+
+Gaussian elimination, also known as row reduction, is an algorithm in linear algebra for solving a system of linear equations. Program illustrates how to solve a system using this method in python.
 
