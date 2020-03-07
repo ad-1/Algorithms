@@ -71,3 +71,14 @@ The secant method root-finding algorithm in Python. The method uses a succession
 
 Gaussian elimination, also known as row reduction, is an algorithm in linear algebra for solving a system of linear equations. Program illustrates how to solve a system using this method in python.
 
+
+## Sorting
+
+TODO: Write sections for sorting algorithms...
+
+## Selection Sort
+## Insertion Sort
+## Bubble Sort
+## Merge Sort
+## Quick Sort
+
