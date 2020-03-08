@@ -1,5 +1,7 @@
 # Bisection Method - Numerical Analysis
 
+import math
+
 """
     The bisection method is a root-finding method
     that applies to any continuous functions
@@ -20,6 +22,9 @@ def f(x):
 
 
 def check_root_bracket(x0, x1):
+    """
+    check interval can be used to solve for root
+    """
     f_x1 = f(x0)
     f_x2 = f(x1)
     if f_x1 * f_x2 < 0:
@@ -27,14 +32,17 @@ def check_root_bracket(x0, x1):
     return False
 
 
-def bisection(n, interval):
+def bisection(n, interval, err):
+    """
+    solve for root using bisection method
+    """
     x0, x1 = interval[0], interval[1]
     if not check_root_bracket(x0, x1):
         return None
     for i in range(n):
         x2 = x0 + ((x1 - x0) / 2)
         y = f(x2)
-        if -0.0001 < y < 0.0001:
+        if -err < y < err:
             return x2
         if check_root_bracket(x0, x2):
             x1 = x2
@@ -43,11 +51,28 @@ def bisection(n, interval):
     return None
 
 
-if __name__ == '__main__':
+def error_bound(interval, err):
+    """
+    determine the number of iterations required to find the
+    root within a specified error bound
+    """
+    # err = (b-a)/(2**n) # == abs(root_approx - root)
+    # err(2**n) = (b-a)
+    # 2**n = (b-a)/err
+    # ln(2**n) = ln((b-a)/err)
+    # nln(2) = ln((b-a)/err)
+    a, b = interval[0], interval[1]
+    n = math.log((b-a)/(math.log(2)*err))
+    return int(math.ceil(n))
 
-    n_iter = 100
+
+# Program driver
+if __name__ == '__main__':
     a_b = [1, 2]
-    root = bisection(n_iter, a_b)
+    _err = 0.0001
+    n_approx = error_bound(a_b, _err)
+    print('Number of iterations error bound: {}'.format(n_approx))
+    root = bisection(n_approx, a_b, _err)
     if root:
         print('root of f(x) on interval {} : x = {}'.format(a_b, root))
     else:
