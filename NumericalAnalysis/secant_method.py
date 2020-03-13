@@ -5,6 +5,9 @@
     and is used when a faster convergence than Bisection
     is desired, but it is too difficult or impossible to
     take an analytical derivative of the function f(x).
+
+    It uses a succession of roots of secant lines to better
+    approximate a root of a function f.
 """
 
 from sympy import *
